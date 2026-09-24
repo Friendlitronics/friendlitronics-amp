@@ -38,7 +38,7 @@ enum class ToneStackType { FenderFMV, MarshallFMV, VoxTopBoost, ChampTilt, Acous
 
 inline juce::StringArray ampNames()
 {
-    return { "Twin Twin", "Ack Thirty", "Marshall's Stacked", "Champion", "Acoustic (piezo DI)",
+    return { "Twin Twin", "Ack Thirty", "Stacked Plexi", "Champion", "Acoustic (piezo DI)",
              "Bass: Soft Freezer", "Bass: Bee 51", "Bass: Funky Circle", "Bass: Modern DI",
              "Line / Colour (no amp)" };
 }

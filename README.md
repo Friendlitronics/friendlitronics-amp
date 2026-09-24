@@ -49,7 +49,7 @@ mic position is a continuous control and the plugin is fully self-contained.
 **Amps** (`Source/dsp/AmpVoicing.h`)
 - **Twin Twin** — blackface clean, high headroom, scooped mids, spring reverb
 - **Ack Thirty** — top-boost chime, class-A EL84 bloom, "Cut" control, present mids
-- **Marshall's Stacked** — Plexi/JCM cascaded-gain crunch, tight lows, strong presence
+- **Stacked Plexi** — Plexi/JCM cascaded-gain crunch, tight lows, strong presence
 - **Champion** — single-ended class-A, early asymmetric breakup, lots of sag
 - **Acoustic (piezo DI)** — AER/Loudbox-style clean full-range amp with a piezo
   "imaging" front end (`Source/dsp/AcousticImager.h`) for DI'd acoustic guitars:
