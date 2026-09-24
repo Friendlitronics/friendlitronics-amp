@@ -1,8 +1,8 @@
 /*
-    This file is part of Amp Sim — a guitar, bass and acoustic amp simulator.
+    This file is part of Friendlitronics Amp — a guitar, bass and acoustic amp simulator.
     Copyright (C) 2026 David Zevenbergen
 
-    Amp Sim is free software: you can redistribute it and/or modify it under
+    Friendlitronics Amp is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free
     Software Foundation, either version 3 of the License, or (at your option)
     any later version. It is distributed WITHOUT ANY WARRANTY; without even the
@@ -24,8 +24,8 @@ AmpSimAudioProcessorEditor::AmpSimAudioProcessorEditor (AmpSimAudioProcessor& p)
     setLookAndFeel (&lookAndFeel);
 
     // Title.
-    titleLabel.setText ("AMP SIM", juce::dontSendNotification);
-    titleLabel.setFont (juce::Font (22.0f, juce::Font::bold));
+    titleLabel.setText ("FRIENDLITRONICS AMP", juce::dontSendNotification);
+    titleLabel.setFont (juce::Font (18.0f, juce::Font::bold));
     titleLabel.setColour (juce::Label::textColourId, AmpLookAndFeel::cream);
     addAndMakeVisible (titleLabel);
 
@@ -237,7 +237,7 @@ void AmpSimAudioProcessorEditor::resized()
 
     // Header.
     auto header = area.removeFromTop (34);
-    titleLabel.setBounds (header.removeFromLeft (220));
+    titleLabel.setBounds (header.removeFromLeft (260));
     deletePresetButton.setBounds (header.removeFromRight (44).withSizeKeepingCentre (42, 24));
     header.removeFromRight (4);
     savePresetButton.setBounds (header.removeFromRight (52).withSizeKeepingCentre (50, 24));

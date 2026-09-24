@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.22)
 set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "Build universal binary")
 set(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum macOS deployment target")
 
-project(AmpSim VERSION 0.8.0 LANGUAGES C CXX)
+project(FriendlitronicsAmp VERSION 0.8.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -43,35 +43,35 @@ else()
     set(AMPSIM_COPY_AFTER_BUILD TRUE)
 endif()
 
-juce_add_plugin(AmpSim
-    COMPANY_NAME            "Elegancia"
-    BUNDLE_ID               "dev.elegancia.ampsim"
-    PLUGIN_MANUFACTURER_CODE Eleg
+juce_add_plugin(FriendlitronicsAmp
+    COMPANY_NAME            "Friendlitronics"
+    BUNDLE_ID               "dev.elegancia.friendlitronicsamp"
+    PLUGIN_MANUFACTURER_CODE Frnd
     PLUGIN_CODE             Amp1
     FORMATS                 AU VST3 Standalone
-    PRODUCT_NAME            "Amp Sim"
+    PRODUCT_NAME            "Friendlitronics Amp"
     IS_SYNTH                FALSE
     NEEDS_MIDI_INPUT        FALSE
     NEEDS_MIDI_OUTPUT       FALSE
     IS_MIDI_EFFECT          FALSE
     COPY_PLUGIN_AFTER_BUILD ${AMPSIM_COPY_AFTER_BUILD})
 
-juce_generate_juce_header(AmpSim)
+juce_generate_juce_header(FriendlitronicsAmp)
 
 # DSP modules are header-only (Source/dsp/*.h); only the plugin shell and the
 # custom look-and-feel need translation units.
-target_sources(AmpSim PRIVATE
+target_sources(FriendlitronicsAmp PRIVATE
     Source/PluginProcessor.cpp
     Source/PluginEditor.cpp
     Source/ui/AmpLookAndFeel.cpp)
 
-target_compile_definitions(AmpSim PUBLIC
+target_compile_definitions(FriendlitronicsAmp PUBLIC
     JUCE_WEB_BROWSER=0
     JUCE_USE_CURL=0
     JUCE_VST3_CAN_REPLACE_VST2=0
     JUCE_DISPLAY_SPLASH_SCREEN=0)
 
-target_link_libraries(AmpSim PRIVATE
+target_link_libraries(FriendlitronicsAmp PRIVATE
     juce::juce_audio_utils
     juce::juce_dsp
     PUBLIC
@@ -79,5 +79,5 @@ target_link_libraries(AmpSim PRIVATE
     juce::juce_recommended_lto_flags
     juce::juce_recommended_warning_flags)
 
-target_compile_options(AmpSim PRIVATE
+target_compile_options(FriendlitronicsAmp PRIVATE
     $<$<CXX_COMPILER_ID:AppleClang,Clang,GNU>:-Wall -Wextra>)

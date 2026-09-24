@@ -1,8 +1,8 @@
 /*
-    This file is part of Amp Sim — a guitar, bass and acoustic amp simulator.
+    This file is part of Friendlitronics Amp — a guitar, bass and acoustic amp simulator.
     Copyright (C) 2026 David Zevenbergen
 
-    Amp Sim is free software: you can redistribute it and/or modify it under
+    Friendlitronics Amp is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free
     Software Foundation, either version 3 of the License, or (at your option)
     any later version. It is distributed WITHOUT ANY WARRANTY; without even the

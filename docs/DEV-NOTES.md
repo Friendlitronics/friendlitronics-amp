@@ -1,4 +1,4 @@
-# Amp Sim — developer notes
+# Friendlitronics Amp — developer notes
 
 _Last updated: 2026-09-23 (v0.8.0)_
 
@@ -35,15 +35,15 @@ cmake -B build -G "Xcode"
 cmake --build build --config Release
 
 # Validate the AU:
-auval -v aufx Amp1 Eleg
+auval -v aufx Amp1 Frnd
 
 # Run the standalone:
-open "build/AmpSim_artefacts/Release/Standalone/Amp Sim.app"
+open "build/FriendlitronicsAmp_artefacts/Release/Standalone/Amp Sim.app"
 ```
 
 Installed plugin locations (from COPY_PLUGIN_AFTER_BUILD):
-- AU:   `~/Library/Audio/Plug-Ins/Components/Amp Sim.component`
-- VST3: `~/Library/Audio/Plug-Ins/VST3/Amp Sim.vst3`
+- AU:   `~/Library/Audio/Plug-Ins/Components/Friendlitronics Amp.component`
+- VST3: `~/Library/Audio/Plug-Ins/VST3/Friendlitronics Amp.vst3`
 
 ## Architecture (where things live)
 
@@ -215,7 +215,7 @@ places to give top back are `stageLpHz`/`outputLpHz` and the mic presence peak.
 
 ## User presets (v0.6.0)
 `Source/PresetManager.h` — one XML file per preset (the whole APVTS state) in
-`~/Library/Application Support/Amp Sim/Presets`. Factory presets remain host
+`~/Library/Application Support/Friendlitronics Amp/Presets`. Factory presets remain host
 programs; user presets are editor-only, listed under a MY PRESETS section in the
 same combo, with SAVE / DEL buttons in the header.
 

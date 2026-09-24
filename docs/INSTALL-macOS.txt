@@ -1,4 +1,4 @@
-AMP SIM 0.8.0 — macOS (Apple Silicon + Intel, macOS 11 or newer)
+FRIENDLITRONICS AMP 0.8.0 — macOS (Apple Silicon + Intel, macOS 11 or newer)
 =================================================================
 
 A guitar / bass / acoustic amp sim, pedalboard AND colour box for Ableton.
@@ -13,15 +13,15 @@ A guitar / bass / acoustic amp sim, pedalboard AND colour box for Ableton.
   * TAPE / FLUTTER / CRUSH / SR / NOISE / NARROW for lofi and tape colour
 
 There are two copies of the same plugin in this folder:
-  Amp Sim.vst3        <- VST3 (recommended for Ableton)
-  Amp Sim.component   <- Audio Unit (optional; also works in Logic/GarageBand)
+  Friendlitronics Amp.vst3        <- VST3 (recommended for Ableton)
+  Friendlitronics Amp.component   <- Audio Unit (optional; also works in Logic/GarageBand)
 
 1. COPY THE PLUGIN
    In Finder, press Cmd+Shift+G, paste the path below, press Enter, and drag the
    file into that folder (create the folder if it doesn't exist):
 
-     Amp Sim.vst3       ->  ~/Library/Audio/Plug-Ins/VST3
-     Amp Sim.component  ->  ~/Library/Audio/Plug-Ins/Components
+     Friendlitronics Amp.vst3       ->  ~/Library/Audio/Plug-Ins/VST3
+     Friendlitronics Amp.component  ->  ~/Library/Audio/Plug-Ins/Components
 
    >>> If macOS blocks it and the "Allow" button in System Settings does
    >>> nothing (or never appears), that is expected for plug-ins. See
@@ -32,7 +32,7 @@ There are two copies of the same plugin in this folder:
    blocks it after downloading ("damaged" or "can't be verified"). Open Terminal
    (Cmd+Space, type Terminal), paste this whole line, and press Enter:
 
-     xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/"Amp Sim.vst3" ~/Library/Audio/Plug-Ins/Components/"Amp Sim.component" 2>/dev/null; killall -9 AudioComponentRegistrar 2>/dev/null; echo done
+     xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/"Friendlitronics Amp.vst3" ~/Library/Audio/Plug-Ins/Components/"Friendlitronics Amp.component" 2>/dev/null; killall -9 AudioComponentRegistrar 2>/dev/null; echo done
 
    (It's fine if you only installed one of the two files.)
 
@@ -40,14 +40,14 @@ There are two copies of the same plugin in this folder:
    Live > Settings (Live 11: Preferences) > Plug-Ins tab:
      - turn on "Use VST3 Plug-in System Folders" (and/or "Use Audio Units v2")
      - click "Rescan"
-   Then in the browser: Plug-Ins > Elegancia > Amp Sim. Drop it on a track.
+   Then in the browser: Plug-Ins > Friendlitronics > Friendlitronics Amp. Drop it on a track.
 
 PRESETS
   The menu is split into FACTORY RIGS, FACTORY PEDALBOARDS, and your own saved
   ones. SAVE asks whether to store Everything, Amp only, or Pedalboard only —
   so you can drop any board onto any amp. An amp preset never moves your
   pedals, and a board preset never touches your amp.
-  They are files in ~/Library/Application Support/Amp Sim/Presets.
+  They are files in ~/Library/Application Support/Friendlitronics Amp/Presets.
 
 NOTES
   - Drag tiles in the chain strip to reorder, including the AMP tile. Click a

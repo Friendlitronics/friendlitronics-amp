@@ -13,6 +13,16 @@ jobs:
     name: macOS (universal)
     runs-on: macos-14
 
+    # Signing is optional: without these secrets the job still builds and
+    # uploads an unsigned zip, so forks and pull requests work unchanged.
+    env:
+      MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}
+      MACOS_CERT_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
+      SIGN_ID: ${{ secrets.SIGN_ID }}
+      TEAM_ID: ${{ secrets.TEAM_ID }}
+      APPLE_ID: ${{ secrets.APPLE_ID }}
+      APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -34,18 +44,39 @@ jobs:
         # so put it where auval will find it before asking.
         run: |
           mkdir -p ~/Library/Audio/Plug-Ins/Components
-          cp -R "build/AmpSim_artefacts/Release/AU/Amp Sim.component" \
+          cp -R "build/FriendlitronicsAmp_artefacts/Release/AU/Friendlitronics Amp.component" \
                 ~/Library/Audio/Plug-Ins/Components/
           killall -9 AudioComponentRegistrar 2>/dev/null || true
-          auval -v aufx Amp1 Eleg
+          auval -v aufx Amp1 Frnd
 
-      - name: Package
+      - name: Import signing certificate
+        if: env.MACOS_CERT_P12 != ''
         run: |
-          VERSION=$(grep -m1 'project(AmpSim VERSION' CMakeLists.txt | sed -E 's/.*VERSION ([0-9.]+).*/\1/')
-          DIR="AmpSim-${VERSION}-macOS"
+          echo "$MACOS_CERT_P12" | base64 --decode > /tmp/cert.p12
+          security create-keychain -p actions build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p actions build.keychain
+          security import /tmp/cert.p12 -k build.keychain -P "$MACOS_CERT_PASSWORD" \
+                          -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k actions \
+                          build.keychain > /dev/null
+          rm /tmp/cert.p12
+
+      - name: Sign, notarise and package
+        if: env.MACOS_CERT_P12 != ''
+        run: |
+          ./scripts/sign-and-notarise.sh
+          VERSION=$(grep -m1 'project(FriendlitronicsAmp VERSION' CMakeLists.txt | sed -E 's/.*VERSION ([0-9.]+).*/\1/')
+          echo "ZIP=dist/FriendlitronicsAmp-${VERSION}-macOS.zip" >> "$GITHUB_ENV"
+
+      - name: Package (unsigned)
+        if: env.MACOS_CERT_P12 == ''
+        run: |
+          VERSION=$(grep -m1 'project(FriendlitronicsAmp VERSION' CMakeLists.txt | sed -E 's/.*VERSION ([0-9.]+).*/\1/')
+          DIR="FriendlitronicsAmp-${VERSION}-macOS"
           mkdir -p "dist/$DIR"
-          ditto "build/AmpSim_artefacts/Release/VST3/Amp Sim.vst3" "dist/$DIR/Amp Sim.vst3"
-          ditto "build/AmpSim_artefacts/Release/AU/Amp Sim.component" "dist/$DIR/Amp Sim.component"
+          ditto "build/FriendlitronicsAmp_artefacts/Release/VST3/Friendlitronics Amp.vst3" "dist/$DIR/Friendlitronics Amp.vst3"
+          ditto "build/FriendlitronicsAmp_artefacts/Release/AU/Friendlitronics Amp.component" "dist/$DIR/Friendlitronics Amp.component"
           cp docs/INSTALL-macOS.txt "dist/$DIR/How to install.txt"
           ditto -c -k --sequesterRsrc --keepParent "dist/$DIR" "dist/$DIR.zip"
           echo "ZIP=dist/$DIR.zip" >> "$GITHUB_ENV"
@@ -53,7 +84,7 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: AmpSim-macOS
+          name: FriendlitronicsAmp-macOS
           path: ${{ env.ZIP }}
 
       # Tagging v1.2.3 publishes a release with the zip attached.
@@ -63,6 +94,9 @@ jobs:
         with:
           files: ${{ env.ZIP }}
           body: |
-            Unsigned build. After copying the plugin into
-            `~/Library/Audio/Plug-Ins`, clear the quarantine flag — see the
-            install notes in the zip, or the Install section of the README.
+            Drop `Friendlitronics Amp.vst3` into `~/Library/Audio/Plug-Ins/VST3`
+            (and/or the `.component` into `Components`), then rescan in your host.
+
+            If this build is unsigned, macOS will block it until you clear the
+            quarantine flag — see the install notes in the zip, or the Install
+            section of the README.

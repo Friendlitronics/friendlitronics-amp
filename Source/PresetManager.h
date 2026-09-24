@@ -1,8 +1,8 @@
 /*
-    This file is part of Amp Sim — a guitar, bass and acoustic amp simulator.
+    This file is part of Friendlitronics Amp — a guitar, bass and acoustic amp simulator.
     Copyright (C) 2026 David Zevenbergen
 
-    Amp Sim is free software: you can redistribute it and/or modify it under
+    Friendlitronics Amp is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free
     Software Foundation, either version 3 of the License, or (at your option)
     any later version. It is distributed WITHOUT ANY WARRANTY; without even the
@@ -20,7 +20,7 @@
 /**
     User presets, stored as one XML file per preset under
 
-        ~/Library/Application Support/Amp Sim/Presets/
+        ~/Library/Application Support/Friendlitronics Amp/Presets/
 
     A preset always contains the whole APVTS state, but carries a **scope** that
     says how much of it to apply when loaded:
@@ -55,8 +55,27 @@ namespace PresetManager
     inline juce::File directory()
     {
         return juce::File::getSpecialLocation (juce::File::userApplicationDataDirectory)
-                   .getChildFile ("Amp Sim")
+                   .getChildFile ("Friendlitronics Amp")
                    .getChildFile ("Presets");
+    }
+
+    /** The plugin used to be called "Amp Sim". Anyone who saved presets under
+        the old name keeps them: the folder is copied across once, on first use.
+        The old folder is left alone, so downgrading loses nothing either. */
+    inline void migrateLegacyPresets()
+    {
+        auto current = directory();
+        if (current.isDirectory())
+            return;
+
+        auto legacy = juce::File::getSpecialLocation (juce::File::userApplicationDataDirectory)
+                          .getChildFile ("Amp Sim").getChildFile ("Presets");
+        if (! legacy.isDirectory())
+            return;
+
+        if (current.createDirectory().wasOk())
+            for (const auto& f : legacy.findChildFiles (juce::File::findFiles, false, "*.ampsim"))
+                f.copyFileTo (current.getChildFile (f.getFileName()));
     }
 
     inline juce::String prefixFor (Scope s)
@@ -92,6 +111,8 @@ namespace PresetManager
     /** Every saved preset, sorted by name within each scope. */
     inline std::vector<Entry> listAll()
     {
+        migrateLegacyPresets();
+
         std::vector<Entry> entries;
         auto dir = directory();
         if (! dir.isDirectory())

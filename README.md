@@ -1,4 +1,4 @@
-# Amp Sim
+# Friendlitronics Amp
 
 An amp simulator, pedalboard and colour box in one plugin — **AU + VST3 +
 Standalone**, macOS, built with JUCE and CMake.
@@ -20,16 +20,16 @@ every control is continuous.
 
 Grab the zip from [Releases](../../releases), then:
 
-1. Drag `Amp Sim.vst3` into `~/Library/Audio/Plug-Ins/VST3` (and/or
-   `Amp Sim.component` into `~/Library/Audio/Plug-Ins/Components` for the AU).
+1. Drag `Friendlitronics Amp.vst3` into `~/Library/Audio/Plug-Ins/VST3` (and/or
+   `Friendlitronics Amp.component` into `~/Library/Audio/Plug-Ins/Components` for the AU).
 2. **Clear the quarantine flag.** Release builds are not signed with a paid
    Apple Developer certificate, so macOS blocks them — and for plug-ins the
    "Open Anyway" button in System Settings usually never appears, because a
    plug-in is not an app. Paste this into Terminal *after* copying the files:
 
    ```bash
-   for p in ~/Library/Audio/Plug-Ins/VST3/"Amp Sim.vst3" \
-            ~/Library/Audio/Plug-Ins/Components/"Amp Sim.component"; do
+   for p in ~/Library/Audio/Plug-Ins/VST3/"Friendlitronics Amp.vst3" \
+            ~/Library/Audio/Plug-Ins/Components/"Friendlitronics Amp.component"; do
      [ -e "$p" ] || continue
      xattr -dr com.apple.quarantine "$p"
      codesign --force --deep --sign - "$p" >/dev/null 2>&1
@@ -39,7 +39,9 @@ Grab the zip from [Releases](../../releases), then:
 3. Rescan in your host (in Live: Settings → Plug-Ins → Rescan).
 
 Building it yourself avoids all of the above, since locally built binaries are
-never quarantined.
+never quarantined. Releases signed with an Apple Developer ID and notarised
+install with no extra steps at all — see `scripts/sign-and-notarise.sh`, which
+CI runs automatically when the signing secrets are configured.
 
 ## What it models
 
@@ -170,7 +172,7 @@ only*. That split is the useful part — a rig is usually "this board through th
 amp", and the two halves get swapped independently. An amp preset never moves
 your pedals; a board preset never touches your amp. **DEL** removes the selected
 user preset. They live as ordinary files in
-`~/Library/Application Support/Amp Sim/Presets/`.
+`~/Library/Application Support/Friendlitronics Amp/Presets/`.
 
 Loading a factory rig first resets every parameter to its default, so presets
 are self-contained and can never inherit a stray setting from the one before.
@@ -322,7 +324,7 @@ Notes:
 Validate the Audio Unit:
 
 ```bash
-auval -v aufx Amp1 Eleg
+auval -v aufx Amp1 Frnd
 ```
 
 ## Parameters

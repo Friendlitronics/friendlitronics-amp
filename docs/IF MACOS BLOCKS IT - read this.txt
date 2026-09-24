@@ -25,7 +25,7 @@ THE FIX
 
 3. Paste this ENTIRE line and press Enter:
 
-for p in ~/Library/Audio/Plug-Ins/VST3/"Amp Sim.vst3" ~/Library/Audio/Plug-Ins/Components/"Amp Sim.component"; do [ -e "$p" ] || continue; xattr -dr com.apple.quarantine "$p" 2>/dev/null; codesign --force --deep --sign - "$p" >/dev/null 2>&1; echo "fixed: $p"; done; killall -9 AudioComponentRegistrar 2>/dev/null; echo "done"
+for p in ~/Library/Audio/Plug-Ins/VST3/"Friendlitronics Amp.vst3" ~/Library/Audio/Plug-Ins/Components/"Friendlitronics Amp.component"; do [ -e "$p" ] || continue; xattr -dr com.apple.quarantine "$p" 2>/dev/null; codesign --force --deep --sign - "$p" >/dev/null 2>&1; echo "fixed: $p"; done; killall -9 AudioComponentRegistrar 2>/dev/null; echo "done"
 
    It should print "fixed: ..." for each plugin it found, then "done".
 
@@ -40,7 +40,7 @@ Then the plugin isn't where the command looked. Two common reasons:
      one (~/Library/...). For that, use this version instead — it will ask for
      your password:
 
-sudo xattr -dr com.apple.quarantine /Library/Audio/Plug-Ins/VST3/"Amp Sim.vst3" /Library/Audio/Plug-Ins/Components/"Amp Sim.component"; sudo codesign --force --deep --sign - /Library/Audio/Plug-Ins/VST3/"Amp Sim.vst3"; killall -9 AudioComponentRegistrar 2>/dev/null; echo done
+sudo xattr -dr com.apple.quarantine /Library/Audio/Plug-Ins/VST3/"Friendlitronics Amp.vst3" /Library/Audio/Plug-Ins/Components/"Friendlitronics Amp.component"; sudo codesign --force --deep --sign - /Library/Audio/Plug-Ins/VST3/"Friendlitronics Amp.vst3"; killall -9 AudioComponentRegistrar 2>/dev/null; echo done
 
   b) It is still sitting in Downloads and was never copied. Check the folder:
      in Finder press Cmd+Shift+G and paste  ~/Library/Audio/Plug-Ins/VST3
@@ -49,7 +49,7 @@ TO CHECK WHETHER IT WORKED
 --------------------------
 Paste this; it should say "quarantine gone":
 
-xattr -r -p com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/"Amp Sim.vst3" >/dev/null 2>&1 && echo "STILL QUARANTINED" || echo "quarantine gone"
+xattr -r -p com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/"Friendlitronics Amp.vst3" >/dev/null 2>&1 && echo "STILL QUARANTINED" || echo "quarantine gone"
 
 A NOTE ON WHY THIS IS NEEDED AT ALL
 -----------------------------------
