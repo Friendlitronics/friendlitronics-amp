@@ -1,0 +1,32 @@
+diff --git a/modules/juce_gui_basics/native/juce_Windowing_mac.mm b/modules/juce_gui_basics/native/juce_Windowing_mac.mm
+index ad459d4..fe43c17 100644
+--- a/modules/juce_gui_basics/native/juce_Windowing_mac.mm
++++ b/modules/juce_gui_basics/native/juce_Windowing_mac.mm
+@@ -23,6 +23,18 @@
+   ==============================================================================
+ */
+ 
++// --- Local workaround (not upstream JUCE) ------------------------------------
++// CGWindowListCreateImage is marked unavailable ("obsoleted in macOS 15.0") in
++// the macOS 15 SDK shipped with Xcode 16, which breaks the JUCE 7 build. The
++// symbol still exists in CoreGraphics, so we re-declare it under a different
++// name with an asm() alias to the real symbol; this sidesteps the SDK's
++// unavailability attribute. Remove when moving to a JUCE version that uses
++// ScreenCaptureKit (JUCE 8.x).
++extern "C" CGImageRef juce_CGWindowListCreateImage (CGRect, CGWindowListOption,
++                                                    CGWindowID, CGWindowImageOption)
++    __asm("_CGWindowListCreateImage");
++// -----------------------------------------------------------------------------
++
+ namespace juce
+ {
+ 
+@@ -529,7 +541,7 @@ static Image createNSWindowSnapshot (NSWindow* nsWindow)
+         #define JUCE_DEPRECATION_IGNORED 1
+        #endif
+ 
+-        CGImageRef screenShot = CGWindowListCreateImage (CGRectNull,
++        CGImageRef screenShot = juce_CGWindowListCreateImage (CGRectNull,
+                                                          kCGWindowListOptionIncludingWindow,
+                                                          (CGWindowID) [nsWindow windowNumber],
+                                                          kCGWindowImageBoundsIgnoreFraming);

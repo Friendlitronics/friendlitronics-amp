@@ -1,0 +1,28 @@
+# Build artifacts
+build/
+cmake-build-*/
+
+# JUCE checkout: fetched by CMake, or a local checkout/symlink placed here.
+# Both spellings, because a symlink is a file to git, not a directory.
+/JUCE
+/JUCE/
+
+# macOS
+.DS_Store
+
+# Claude Code session state
+.claude/
+
+# IDE
+.idea/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+.vscode/
+
+# Plugin binaries built locally
+*.component
+*.vst3
+*.app
+
+# Packaged builds for sharing
+dist/

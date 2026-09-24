@@ -1,0 +1,68 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  macos:
+    name: macOS (universal)
+    runs-on: macos-14
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # JUCE is fetched by CMake; caching it keeps builds to a couple of minutes.
+      - name: Cache fetched JUCE
+        uses: actions/cache@v4
+        with:
+          path: build/_deps
+          key: juce-${{ runner.os }}-${{ hashFiles('CMakeLists.txt', 'patches/*.patch') }}
+
+      - name: Configure
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: cmake --build build --config Release -j 3
+
+      - name: Validate the Audio Unit
+        # auval needs the component installed; CI builds skip the install step,
+        # so put it where auval will find it before asking.
+        run: |
+          mkdir -p ~/Library/Audio/Plug-Ins/Components
+          cp -R "build/AmpSim_artefacts/Release/AU/Amp Sim.component" \
+                ~/Library/Audio/Plug-Ins/Components/
+          killall -9 AudioComponentRegistrar 2>/dev/null || true
+          auval -v aufx Amp1 Eleg
+
+      - name: Package
+        run: |
+          VERSION=$(grep -m1 'project(AmpSim VERSION' CMakeLists.txt | sed -E 's/.*VERSION ([0-9.]+).*/\1/')
+          DIR="AmpSim-${VERSION}-macOS"
+          mkdir -p "dist/$DIR"
+          ditto "build/AmpSim_artefacts/Release/VST3/Amp Sim.vst3" "dist/$DIR/Amp Sim.vst3"
+          ditto "build/AmpSim_artefacts/Release/AU/Amp Sim.component" "dist/$DIR/Amp Sim.component"
+          cp docs/INSTALL-macOS.txt "dist/$DIR/How to install.txt"
+          ditto -c -k --sequesterRsrc --keepParent "dist/$DIR" "dist/$DIR.zip"
+          echo "ZIP=dist/$DIR.zip" >> "$GITHUB_ENV"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AmpSim-macOS
+          path: ${{ env.ZIP }}
+
+      # Tagging v1.2.3 publishes a release with the zip attached.
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.ZIP }}
+          body: |
+            Unsigned build. After copying the plugin into
+            `~/Library/Audio/Plug-Ins`, clear the quarantine flag — see the
+            install notes in the zip, or the Install section of the README.
