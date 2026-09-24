@@ -64,16 +64,16 @@ namespace PedalPresets
             //==================================================================
             // Shoegaze
             //==================================================================
-            { "Shoegaze: Glide (MBV)",
+            { "Shoegaze: Glide",
               "Fuzz into a slow, deep chorus, with the pitch pedal detuning underneath — "
               "the seasick, bent-into-tune sound.",
               { {"fuzzboxOn",1}, {"fuzzboxA",7.5f}, {"fuzzboxB",4.0f}, {"fuzzboxC",5.0f},
-                {"whammyOn",1},  {"whammyA",5.0f},  {"whammyB",3.0f},  {"whammyC",7.5f},
+                {"diveOn",1},  {"diveA",5.0f},  {"diveB",3.0f},  {"diveC",7.5f},
                 {"chorusOn",1},  {"chorusA",1.2f},  {"chorusB",8.5f},  {"chorusC",6.0f},
                 {"delayOn",1},   {"delayA",2.0f},   {"delayB",2.5f},   {"delayC",2.0f}, {"delayD",4.0f} },
-              chain ({ Id::Whammy, Id::Fuzz }, { Id::Chorus, Id::Delay }) },
+              chain ({ Id::Dive, Id::Fuzz }, { Id::Chorus, Id::Delay }) },
 
-            { "Shoegaze: Shimmer (Cocteau)",
+            { "Shoegaze: Shimmer",
               "No dirt at all — compression, chorus and a long phased delay. The guitar "
               "stops sounding like a guitar and starts sounding like weather.",
               { {"sustainOn",1},  {"sustainA",6.0f},  {"sustainB",4.0f},  {"sustainC",5.0f},
@@ -82,7 +82,7 @@ namespace PedalPresets
                 {"delayOn",1},    {"delayA",5.5f},    {"delayB",6.0f},    {"delayC",5.0f}, {"delayD",6.0f} },
               chain ({ Id::Sustainer }, { Id::Chorus, Id::Phaser, Id::Delay }) },
 
-            { "Shoegaze: Wash (Slowdive)",
+            { "Shoegaze: Wash",
               "Edge-of-breakup drive, then an enormous delay after the cab. Chords blur "
               "into the next one before they finish.",
               { {"screamerOn",1}, {"screamerA",3.0f}, {"screamerB",5.0f}, {"screamerC",5.0f},
@@ -93,7 +93,7 @@ namespace PedalPresets
             //==================================================================
             // Indie
             //==================================================================
-            { "Indie: Wobble (Mac)",
+            { "Indie: Wobble",
               "Very slow, very deep chorus on a clean amp — the drunk-tape warble. "
               "Compression first so the wobble sits still.",
               { {"sustainOn",1}, {"sustainA",5.0f}, {"sustainB",5.0f}, {"sustainC",5.0f},
@@ -104,10 +104,10 @@ namespace PedalPresets
               "Light compression, a hint of chorus and a short slap — thickens single-coil "
               "arpeggios without anyone noticing an effect is on.",
               { {"sustainOn",1}, {"sustainA",4.0f}, {"sustainB",3.0f}, {"sustainC",5.0f},
-                {"whammyOn",1},  {"whammyA",5.0f},  {"whammyB",2.0f},  {"whammyC",5.0f},
+                {"diveOn",1},  {"diveA",5.0f},  {"diveB",2.0f},  {"diveC",5.0f},
                 {"chorusOn",1},  {"chorusA",4.0f},  {"chorusB",3.0f},  {"chorusC",3.0f},
                 {"delayOn",1},   {"delayA",1.2f},   {"delayB",1.5f},   {"delayC",2.5f}, {"delayD",6.0f} },
-              chain ({ Id::Sustainer, Id::Whammy }, { Id::Chorus, Id::Delay }) },
+              chain ({ Id::Sustainer, Id::Dive }, { Id::Chorus, Id::Delay }) },
 
             //==================================================================
             // Everyday
@@ -129,10 +129,10 @@ namespace PedalPresets
             { "Lead: Octave Up",
               "An octave above, blended under the dry note and then overdriven — synthetic "
               "and vocal at the top of the neck.",
-              { {"whammyOn",1},   {"whammyA",10.0f},  {"whammyB",4.0f},   {"whammyC",0.0f},
+              { {"diveOn",1},   {"diveA",10.0f},  {"diveB",4.0f},   {"diveC",0.0f},
                 {"screamerOn",1}, {"screamerA",6.0f}, {"screamerB",6.0f}, {"screamerC",5.0f},
                 {"delayOn",1},    {"delayA",3.5f},    {"delayB",4.0f},    {"delayC",3.0f}, {"delayD",5.0f} },
-              chain ({ Id::Whammy, Id::Screamer }, { Id::Delay }) },
+              chain ({ Id::Dive, Id::Screamer }, { Id::Delay }) },
 
             { "Ambient: Infinite Wash",
               "Sustainer holding notes up, delay just short of self-oscillation, phaser "

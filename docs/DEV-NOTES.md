@@ -165,7 +165,7 @@ gives an SVT mid Q, and no anechoic data exists for any bass guitar cab.
 ## Pedalboard (v0.5.0)
 `Source/dsp/pedals/`: `PedalCommon.h` (LFO, allpass, envelope, Hermite delay
 line), `DrivePedals.h` (Screamer, Fuzz), `FilterPedals.h` (Wah, Sustainer),
-`PitchPedal.h` (Whammy), `TimePedals.h` (Chorus, Phaser, Delay), `PedalBoard.h`
+`PitchPedal.h` (Dive), `TimePedals.h` (Chorus, Phaser, Delay), `PedalBoard.h`
 (ordering, per-slot instances, parameter metadata).
 
 `PedalBoard` keeps a **separate instance of all eight pedals per slot**, so
@@ -248,7 +248,7 @@ Worth recording, because most of the suspects were innocent:
   click detector reports ~600 "clicks" on Champ Breakup: that is a false
   positive, it is detecting the sharp edges of a heavily clipped wave.)
 - **The pitch shifter WAS discontinuous** — see below. Per-pedal inharmonic
-  junk: every other pedal sits at -70 dB or better; Whammy was the outlier.
+  junk: every other pedal sits at -70 dB or better; Dive was the outlier.
 
 If harshness or popping is still reported with all pedals off, the next things
 to instrument are the per-block coefficient recomputation in ToneStack/PowerAmp

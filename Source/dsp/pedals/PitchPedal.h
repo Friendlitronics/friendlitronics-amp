@@ -20,7 +20,7 @@ namespace amp::pedal
 {
 
 /**
-    Whammy / Octave — pitch, by the classic two-tap delay-line method.
+    Dive / Octave — pitch, by the classic two-tap delay-line method.
 
     A delay line read back at a rate other than the one it is written at comes
     out transposed, but the read head eventually runs out of buffer and has to
@@ -52,7 +52,7 @@ namespace amp::pedal
       DOUBLE : adds a second voice a few cents off and ~18 ms late — the ADT
                doubling trick, which needs no pitch tracking at all.
 */
-class Whammy
+class Dive
 {
 public:
     void prepare (const juce::dsp::ProcessSpec& spec)

@@ -38,21 +38,21 @@ enum class ToneStackType { FenderFMV, MarshallFMV, VoxTopBoost, ChampTilt, Acous
 
 inline juce::StringArray ampNames()
 {
-    return { "Fender Twin", "Vox AC30", "Marshall Stack", "Fender Champ", "Acoustic (piezo DI)",
-             "Bass: SVT Fridge", "Bass: Flip-Top B-15", "Bass: Funk 360", "Bass: Modern DI",
+    return { "Twin Twin", "Ack Thirty", "Marshall's Stacked", "Champion", "Acoustic (piezo DI)",
+             "Bass: Soft Freezer", "Bass: Bee 51", "Bass: Funky Circle", "Bass: Modern DI",
              "Line / Colour (no amp)" };
 }
 
 inline juce::StringArray cabNames()
 {
-    return { "2x12 Twin", "2x12 Alnico Blue", "4x12 Greenback", "1x10 Champ", "Acoustic Full-Range",
-             "Bass 8x10 sealed", "Bass 1x15 flip-top", "Bass 1x18 folded horn", "Bass 4x10 + tweeter",
-             "None (line out)" };
+    return { "2x12 Open-Back", "2x12 Alnico Chime", "4x12 Closed-Back", "1x10 Small Combo",
+             "Acoustic Full-Range", "Bass 8x10 Sealed", "Bass 1x15 Vintage",
+             "Bass 1x18 Folded Horn", "Bass 4x10 + Tweeter", "None (line out)" };
 }
 
 inline juce::StringArray micNames()
 {
-    return { "SM57 (dynamic)", "SM7B (dynamic)", "Condenser LDC", "Condenser SDC",
+    return { "Dynamic (bright)", "Dynamic (dark)", "Condenser LDC", "Condenser SDC",
              "None (line out)" };
 }
 

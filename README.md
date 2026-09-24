@@ -47,10 +47,10 @@ Everything is a **parametric / analytical** model (no impulse responses), so the
 mic position is a continuous control and the plugin is fully self-contained.
 
 **Amps** (`Source/dsp/AmpVoicing.h`)
-- **Fender Twin Reverb** — blackface clean, high headroom, scooped mids, spring reverb
-- **Vox AC30** — top-boost chime, class-A EL84 bloom, "Cut" control, present mids
-- **Marshall Stack** — Plexi/JCM cascaded-gain crunch, tight lows, strong presence
-- **Fender Champ** — single-ended class-A, early asymmetric breakup, lots of sag
+- **Twin Twin** — blackface clean, high headroom, scooped mids, spring reverb
+- **Ack Thirty** — top-boost chime, class-A EL84 bloom, "Cut" control, present mids
+- **Marshall's Stacked** — Plexi/JCM cascaded-gain crunch, tight lows, strong presence
+- **Champion** — single-ended class-A, early asymmetric breakup, lots of sag
 - **Acoustic (piezo DI)** — AER/Loudbox-style clean full-range amp with a piezo
   "imaging" front end (`Source/dsp/AcousticImager.h`) for DI'd acoustic guitars:
   - **Body** — body resonators (air ~98 Hz, top/back ~196/235 Hz, 520 Hz plate
@@ -61,12 +61,12 @@ mic position is a continuous control and the plugin is fully self-contained.
   - **Comp** — stereo-linked RMS leveling compressor (evens out strums)
   - **Colour** — AER-style contour: bass/treble lift, mid dip
 
-- **Bass: SVT Fridge** — Ampeg SVT-style tube head: big headroom, 40 Hz / 800 Hz /
+- **Bass: Soft Freezer** — Ampeg SVT-style tube head: big headroom, 40 Hz / 800 Hz /
   4 kHz tone stack (Ampeg's published centres), with the SVT's deliberately
   lopsided mid (+10 dB boost, −20 dB cut)
-- **Bass: Flip-Top B-15** — 25 W Portaflex: warm, dark, early breakup and lots of
+- **Bass: Bee 51** — 25 W Portaflex: warm, dark, early breakup and lots of
   sag. Baxandall ±10 dB @ 40 Hz / ±18 dB @ 5 kHz, per the Heritage reissue spec
-- **Bass: Funk 360** — Acoustic 360: clean and very deep. Its Variamp is a
+- **Bass: Funky Circle** — Acoustic 360: clean and very deep. Its Variamp is a
   series-LC band whose cut is a near-total null while its boost is modest, so
   the Mid knob is asymmetric (+6 / −20 dB); Bass/Treble act as scoop depth
 - **Bass: Modern DI** — hi-fi/Aguilar school: near-flat with huge headroom, the
@@ -90,9 +90,9 @@ All four bass amps add a bi-amp drive front end (`Source/dsp/BassStage.h`):
   Set cab and mic to "None (line out)" and it is flat within 0.03 dB from
   40 Hz to 16 kHz with every colour control at 0.
 
-**Cabs** — 2×12 (Twin), 2×12 Alnico Blue (AC30), 4×12 Greenback (Marshall), 1×10 (Champ),
+**Cabs** — 2×12 open-back, 2×12 alnico, 4×12 closed-back, 1×10 small combo,
 Acoustic Full-Range (8" twin-cone, near-flat to 15 kHz), Bass 8×10 sealed,
-Bass 1×15 flip-top, Bass 1×18 folded horn, Bass 4×10 + tweeter, **None (line out)**.
+Bass 1×15 vintage, Bass 1×18 folded horn, Bass 4×10 + tweeter, **None (line out)**.
 
 Bass cab shapes come from Ampeg's published ±3 dB figures where they exist plus
 the only third-party measurements available (gated CLIO curves of comparable
@@ -101,7 +101,7 @@ breakup lobe that is the audible "top" of a sealed 8×10, rather than a flat
 band to 5 kHz. No anechoic data exists for any bass guitar cab; these are
 informed approximations, not measurements of the real thing.
 
-**Mics** — SM57 (bright dynamic), SM7B (dark/fat dynamic), large-diaphragm
+**Mics** — bright dynamic, dark/fat dynamic, large-diaphragm
 condenser (U87-style), small-diaphragm condenser (KM84-style), None (line out)
 
 Amp, cab and mic are selected **independently**.
@@ -124,7 +124,7 @@ The order is saved with the session and with user presets.
 | Pedal | Knobs | Notes |
 |-------|-------|-------|
 | **Wah** | Pedal / Q / Auto | Cry Baby-ish resonant peak, 400 Hz - 2.2 kHz. Automate Pedal for a real sweep, or turn up Auto for an envelope filter |
-| **Whammy** | Pitch / Mix / Double | Delay-line pitch shift, ±1 octave (5 = unison), with pitch-synchronous grains. Double adds a detuned ADT voice |
+| **Dive** | Pitch / Mix / Double | Delay-line pitch shift, ±1 octave (5 = unison), with pitch-synchronous grains. Double adds a detuned ADT voice |
 | **Sustainer** | Sustain / Attack / Level | Dyna Comp-style 5:1 squash with auto makeup |
 | **Screamer** | Drive / Tone / Level | TS-808: the 720 Hz gain-leg split keeps bass out of the clipper, which *is* the mid-hump |
 | **Fuzz** | Sustain / Tone / Level | Big Muff: three cascaded soft clips inside a 90 Hz - 1.2 kHz band, with the 1 kHz scoop |
@@ -179,10 +179,10 @@ are self-contained and can never inherit a stray setting from the one before.
 
 | Board | What it is |
 |-------|------------|
-| Shoegaze: Glide (MBV) | Fuzz into slow deep chorus, pitch pedal detuning underneath |
-| Shoegaze: Shimmer (Cocteau) | No dirt: compression, chorus, long phased delay |
-| Shoegaze: Wash (Slowdive) | Edge-of-breakup drive, enormous delay after the cab |
-| Indie: Wobble (Mac) | Very slow, very deep chorus on a clean amp |
+| Shoegaze: Glide | Fuzz into slow deep chorus, pitch pedal detuning underneath |
+| Shoegaze: Shimmer | No dirt: compression, chorus, long phased delay |
+| Shoegaze: Wash | Edge-of-breakup drive, enormous delay after the cab |
+| Indie: Wobble | Very slow, very deep chorus on a clean amp |
 | Indie: Jangle Doubler | Light compression, a hint of chorus, short slap |
 | Funk: Auto-Wah Clav | Envelope filter, squashed hard so every note opens it equally |
 | Blues: Screamer + Slap | Mid-humped overdrive and one repeat |
@@ -381,7 +381,8 @@ the source comments say so.
 
 ## A note on names
 
-Model and preset names refer to the classic designs that inspired each voicing.
-They are descriptive references only: this project is not affiliated with,
-endorsed by, or connected to any of the manufacturers or artists named, and all
-trademarks belong to their respective owners.
+The amps, cabs, mics and presets carry invented names. Each voicing is modelled
+on a classic design, and the source comments name those designs openly, because
+that is what the numbers in them refer to and hiding it would make the code
+harder to follow. Nothing here is affiliated with, endorsed by or connected to
+any manufacturer, and all trademarks belong to their respective owners.

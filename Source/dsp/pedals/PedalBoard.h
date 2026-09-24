@@ -27,7 +27,7 @@ namespace amp::pedal
     and dynamics first so they feed the dirt a controlled signal, dirt next,
     modulation and time last — but the chain is user-orderable, so this enum is
     only an identity, not a sequence. */
-enum class Id { Wah = 0, Whammy, Sustainer, Screamer, Fuzz, Chorus, Phaser, Delay, Count };
+enum class Id { Wah = 0, Dive, Sustainer, Screamer, Fuzz, Chorus, Phaser, Delay, Count };
 
 inline constexpr int kNumPedals = (int) Id::Count;
 
@@ -39,10 +39,10 @@ inline constexpr int kChainLength = kNumPedals + 1;
 
 using ChainOrder = std::array<int, (size_t) kChainLength>;
 
-/** Wah, Whammy, Sustainer, Screamer, Fuzz -> AMP -> Chorus, Phaser, Delay. */
+/** Wah, Dive, Sustainer, Screamer, Fuzz -> AMP -> Chorus, Phaser, Delay. */
 inline ChainOrder defaultChainOrder()
 {
-    return { (int) Id::Wah, (int) Id::Whammy, (int) Id::Sustainer, (int) Id::Screamer,
+    return { (int) Id::Wah, (int) Id::Dive, (int) Id::Sustainer, (int) Id::Screamer,
              (int) Id::Fuzz, kAmpToken, (int) Id::Chorus, (int) Id::Phaser, (int) Id::Delay };
 }
 
@@ -89,7 +89,7 @@ inline const char* pedalTag (Id id)
     switch (id)
     {
         case Id::Wah:       return "wah";
-        case Id::Whammy:    return "whammy";
+        case Id::Dive:      return "dive";
         case Id::Sustainer: return "sustain";
         case Id::Screamer:  return "screamer";
         case Id::Fuzz:      return "fuzzbox";
@@ -114,7 +114,7 @@ inline const char* pedalName (Id id)
     switch (id)
     {
         case Id::Wah:       return "Wah";
-        case Id::Whammy:    return "Whammy";
+        case Id::Dive:      return "Dive";
         case Id::Sustainer: return "Sustainer";
         case Id::Screamer:  return "Screamer";
         case Id::Fuzz:      return "Fuzz";
@@ -131,7 +131,7 @@ inline const char* pedalShortName (Id id)
     switch (id)
     {
         case Id::Wah:       return "WAH";
-        case Id::Whammy:    return "WHAM";
+        case Id::Dive:      return "DIVE";
         case Id::Sustainer: return "SUST";
         case Id::Screamer:  return "SCRM";
         case Id::Fuzz:      return "FUZZ";
@@ -151,7 +151,7 @@ inline juce::StringArray pedalKnobNames (Id id)
     switch (id)
     {
         case Id::Wah:       return { "PEDAL", "Q", "AUTO" };
-        case Id::Whammy:    return { "PITCH", "MIX", "DOUBLE" };
+        case Id::Dive:      return { "PITCH", "MIX", "DOUBLE" };
         case Id::Sustainer: return { "SUSTAIN", "ATTACK", "LEVEL" };
         case Id::Screamer:  return { "DRIVE", "TONE", "LEVEL" };
         case Id::Fuzz:      return { "SUSTAIN", "TONE", "LEVEL" };
@@ -168,7 +168,7 @@ inline std::array<float, 4> pedalKnobDefaults (Id id)
     switch (id)
     {
         case Id::Wah:       return { 5.0f, 5.0f, 0.0f, 0.0f };
-        case Id::Whammy:    return { 5.0f, 5.0f, 0.0f, 0.0f };
+        case Id::Dive:      return { 5.0f, 5.0f, 0.0f, 0.0f };
         case Id::Sustainer: return { 5.0f, 3.0f, 5.0f, 0.0f };
         case Id::Screamer:  return { 4.0f, 5.0f, 5.0f, 0.0f };
         case Id::Fuzz:      return { 6.0f, 5.0f, 5.0f, 0.0f };
@@ -241,9 +241,9 @@ public:
                     set.wah.setControls (c.a * 0.1f, c.b * 0.1f, c.c * 0.1f);
                     set.wah.process (block);
                     break;
-                case Id::Whammy:
-                    set.whammy.setControls (c.a * 0.1f, c.b * 0.1f, c.c * 0.1f);
-                    set.whammy.process (block);
+                case Id::Dive:
+                    set.dive.setControls (c.a * 0.1f, c.b * 0.1f, c.c * 0.1f);
+                    set.dive.process (block);
                     break;
                 case Id::Sustainer:
                     set.sustainer.setControls (c.a * 0.1f, c.b * 0.1f, c.c * 0.1f);
@@ -282,7 +282,7 @@ private:
     {
         void prepare (const juce::dsp::ProcessSpec& spec)
         {
-            wah.prepare (spec);       whammy.prepare (spec);
+            wah.prepare (spec);       dive.prepare (spec);
             sustainer.prepare (spec); screamer.prepare (spec);
             fuzz.prepare (spec);      chorus.prepare (spec);
             phaser.prepare (spec);    delay.prepare (spec);
@@ -290,14 +290,14 @@ private:
 
         void reset()
         {
-            wah.reset();       whammy.reset();
+            wah.reset();       dive.reset();
             sustainer.reset(); screamer.reset();
             fuzz.reset();      chorus.reset();
             phaser.reset();    delay.reset();
         }
 
         Wah wah;
-        Whammy whammy;
+        Dive dive;
         Sustainer sustainer;
         Screamer screamer;
         Fuzz fuzz;

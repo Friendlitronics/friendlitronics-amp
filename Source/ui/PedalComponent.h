@@ -32,8 +32,8 @@ inline PedalSkin getPedalSkin (amp::pedal::Id id)
     {
         case amp::pedal::Id::Wah:        // black and chrome treadle
             return { Colour (0xff1b1b1e), Colour (0xff09090b), Colour (0xffd8d8dc),
-                     Colour (0xfff2f2f4), Colour (0xffb9b9bf), "CRY FILTER" };
-        case amp::pedal::Id::Whammy:     // loud red, white screen print
+                     Colour (0xfff2f2f4), Colour (0xffb9b9bf), "VOCAL FILTER" };
+        case amp::pedal::Id::Dive:     // loud red, white screen print
             return { Colour (0xffb3121c), Colour (0xff6d0a11), Colour (0xffffe08a),
                      Colour (0xfffff4f4), Colour (0xffe8e2d8), "PITCH SHIFT" };
         case amp::pedal::Id::Sustainer:  // Dyna-red with cream knobs
@@ -44,13 +44,13 @@ inline PedalSkin getPedalSkin (amp::pedal::Id id)
                      Colour (0xfff7f3df), Colour (0xffe9dfb8), "OVERDRIVE" };
         case amp::pedal::Id::Fuzz:       // muff black / white lettering
             return { Colour (0xff141416), Colour (0xff000000), Colour (0xffe8e8ea),
-                     Colour (0xffffffff), Colour (0xffcfcfd4), "BIG FUZZ" };
+                     Colour (0xffffffff), Colour (0xffcfcfd4), "SUSTAIN FUZZ" };
         case amp::pedal::Id::Chorus:     // pale BBD blue
             return { Colour (0xff2f6ea8), Colour (0xff1b4368), Colour (0xffcfe6ff),
                      Colour (0xfff1f7ff), Colour (0xffdfe9f2), "ANALOG CHORUS" };
         case amp::pedal::Id::Phaser:     // that orange
             return { Colour (0xffd9721f), Colour (0xff8f4410), Colour (0xff2b1a08),
-                     Colour (0xff2b1a08), Colour (0xfff2ddc4), "PHASE 4" };
+                     Colour (0xff2b1a08), Colour (0xfff2ddc4), "FOUR STAGE" };
         case amp::pedal::Id::Delay:      // dark green echo box
             return { Colour (0xff1f5c4a), Colour (0xff10352a), Colour (0xffbfe8d6),
                      Colour (0xffeafaf3), Colour (0xffd6e6dd), "ANALOG ECHO" };

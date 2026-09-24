@@ -35,7 +35,7 @@ namespace Presets
     {
         //                     amp cab mic gain bass mid trb pres res cut mast rev  dist axis ang room out  mix
         static const std::vector<Preset> presets {
-            { "Twin Clean (SM57)", {
+            { "Twin Clean", {
                 {"ampModel",0},{"cabModel",0},{"micModel",0},
                 {"gain",3.0f},{"bass",5.0f},{"mid",5.0f},{"treble",6.5f},
                 {"presence",5.0f},{"resonance",3.0f},{"sweetness",5.0f},{"cut",3.0f},{"master",5.0f},
@@ -43,7 +43,7 @@ namespace Presets
                 {"reverb",20.0f},{"micDistance",15.0f},{"micAxis",30.0f},{"micAngle",0.0f},
                 {"room",10.0f},{"output",0.0f},{"mix",100.0f} } },
 
-            { "AC30 Chime (Condenser)", {
+            { "Ack Thirty Chime", {
                 {"ampModel",1},{"cabModel",1},{"micModel",2},
                 {"gain",5.5f},{"bass",4.0f},{"mid",6.0f},{"treble",7.0f},
                 {"presence",5.0f},{"resonance",4.0f},{"sweetness",7.0f},{"cut",4.0f},{"master",6.0f},
@@ -51,7 +51,7 @@ namespace Presets
                 {"reverb",0.0f},{"micDistance",25.0f},{"micAxis",35.0f},{"micAngle",10.0f},
                 {"room",15.0f},{"output",0.0f},{"mix",100.0f} } },
 
-            { "Marshall Crunch (SM57)", {
+            { "Stacked Crunch", {
                 {"ampModel",2},{"cabModel",2},{"micModel",0},
                 {"gain",7.0f},{"bass",5.0f},{"mid",6.0f},{"treble",6.0f},
                 {"presence",6.5f},{"resonance",6.0f},{"sweetness",6.0f},{"cut",3.0f},{"master",6.0f},
@@ -59,7 +59,7 @@ namespace Presets
                 {"reverb",0.0f},{"micDistance",10.0f},{"micAxis",25.0f},{"micAngle",20.0f},
                 {"room",0.0f},{"output",-1.0f},{"mix",100.0f} } },
 
-            { "Marshall Lead (off-axis)", {
+            { "Stacked Lead (off-axis)", {
                 {"ampModel",2},{"cabModel",2},{"micModel",0},
                 {"gain",9.0f},{"bass",5.0f},{"mid",7.0f},{"treble",6.0f},
                 {"presence",7.0f},{"resonance",6.0f},{"sweetness",6.0f},{"cut",3.0f},{"master",7.0f},
@@ -67,7 +67,7 @@ namespace Presets
                 {"reverb",0.0f},{"micDistance",12.0f},{"micAxis",30.0f},{"micAngle",55.0f},
                 {"room",5.0f},{"output",-2.0f},{"mix",100.0f} } },
 
-            { "Champ Breakup (SM7B)", {
+            { "Champion Breakup", {
                 {"ampModel",3},{"cabModel",3},{"micModel",1},
                 {"gain",6.5f},{"bass",5.0f},{"mid",6.0f},{"treble",6.0f},
                 {"presence",3.0f},{"resonance",2.0f},{"sweetness",6.0f},{"cut",3.0f},{"master",6.0f},
@@ -117,7 +117,7 @@ namespace Presets
             // circuit; the lows never get distorted, only the band above SPLIT.
             //==================================================================
 
-            { "Bass: SVT Rock", {
+            { "Bass: Freezer Rock", {
                 {"ampModel",5},{"cabModel",5},{"micModel",1},
                 {"gain",5.0f},{"bass",6.0f},{"mid",4.5f},{"treble",5.5f},
                 {"presence",5.0f},{"resonance",6.0f},{"sweetness",5.0f},{"cut",3.0f},{"master",5.5f},
@@ -126,7 +126,7 @@ namespace Presets
                 {"reverb",0.0f},{"micDistance",12.0f},{"micAxis",25.0f},{"micAngle",10.0f},
                 {"room",5.0f},{"output",-6.0f},{"mix",100.0f} } },
 
-            { "Bass: Motown Flip-Top", {
+            { "Bass: Sixties Soul", {
                 {"ampModel",6},{"cabModel",6},{"micModel",1},
                 {"gain",5.5f},{"bass",6.0f},{"mid",5.5f},{"treble",3.5f},
                 {"presence",2.0f},{"resonance",5.0f},{"sweetness",6.0f},{"cut",3.0f},{"master",6.0f},
@@ -135,7 +135,7 @@ namespace Presets
                 {"reverb",0.0f},{"micDistance",20.0f},{"micAxis",30.0f},{"micAngle",5.0f},
                 {"room",8.0f},{"output",-4.0f},{"mix",100.0f} } },
 
-            { "Bass: Funk Fingerstyle (360)", {
+            { "Bass: Funk Fingerstyle", {
                 {"ampModel",7},{"cabModel",7},{"micModel",1},
                 {"gain",4.0f},{"bass",6.0f},{"mid",6.5f},{"treble",5.0f},
                 {"presence",4.0f},{"resonance",5.5f},{"sweetness",5.0f},{"cut",3.0f},{"master",4.5f},
