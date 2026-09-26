@@ -18,30 +18,14 @@ every control is continuous.
 
 ## Install
 
-Grab the zip from [Releases](../../releases), then:
+Download the zip from [Releases](../../releases), drag
+`Friendlitronics Amp.vst3` into `~/Library/Audio/Plug-Ins/VST3` (or the
+`.component` into `Components` for the Audio Unit), and rescan in your host.
 
-1. Drag `Friendlitronics Amp.vst3` into `~/Library/Audio/Plug-Ins/VST3` (and/or
-   `Friendlitronics Amp.component` into `~/Library/Audio/Plug-Ins/Components` for the AU).
-2. **Clear the quarantine flag.** Release builds are not signed with a paid
-   Apple Developer certificate, so macOS blocks them — and for plug-ins the
-   "Open Anyway" button in System Settings usually never appears, because a
-   plug-in is not an app. Paste this into Terminal *after* copying the files:
+Release builds are signed with a Developer ID and notarised by Apple, so there
+are no security prompts and nothing to approve.
 
-   ```bash
-   for p in ~/Library/Audio/Plug-Ins/VST3/"Friendlitronics Amp.vst3" \
-            ~/Library/Audio/Plug-Ins/Components/"Friendlitronics Amp.component"; do
-     [ -e "$p" ] || continue
-     xattr -dr com.apple.quarantine "$p"
-     codesign --force --deep --sign - "$p" >/dev/null 2>&1
-   done; killall -9 AudioComponentRegistrar 2>/dev/null; echo done
-   ```
-
-3. Rescan in your host (in Live: Settings → Plug-Ins → Rescan).
-
-Building it yourself avoids all of the above, since locally built binaries are
-never quarantined. Releases signed with an Apple Developer ID and notarised
-install with no extra steps at all — see `scripts/sign-and-notarise.sh`, which
-CI runs automatically when the signing secrets are configured.
+Requires macOS 11 or newer; universal for Apple Silicon and Intel.
 
 ## What it models
 
@@ -326,6 +310,16 @@ Validate the Audio Unit:
 ```bash
 auval -v aufx Amp1 Frnd
 ```
+
+### Releasing
+
+`scripts/sign-and-notarise.sh` signs with a Developer ID, submits to Apple for
+notarisation, staples the ticket to both bundles and repackages. CI runs it
+automatically on a `v*` tag when the signing secrets are present, and falls back
+to an unsigned zip when they are not, so forks still build.
+
+A build you make yourself is not quarantined and needs no signing to use
+locally — this only matters for builds other people download.
 
 ## Parameters
 

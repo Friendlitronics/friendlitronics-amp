@@ -1,60 +1,47 @@
-FRIENDLITRONICS AMP 0.8.0 — macOS (Apple Silicon + Intel, macOS 11 or newer)
-=================================================================
+FRIENDLITRONICS AMP — install (macOS 11 or newer, Apple Silicon + Intel)
+========================================================================
 
-A guitar / bass / acoustic amp sim, pedalboard AND colour box for Ableton.
+Two copies of the same plugin are in this folder. Most people want the VST3:
 
-  * AMP tab: 4 guitar amps, an acoustic piezo-DI amp, 4 bass amps, and a
-    Line / Colour path for bus and master processing
-  * PEDALS tab: 8 pedals on a chain strip you can DRAG TO REORDER. The amp
-    itself is a tile in that chain: pedals left of it feed the amp input,
-    pedals right of it run after the cab like an effects loop.
-  * 23 factory rigs + 10 factory pedalboards (shoegaze, indie, funk, blues,
-    ambient, grunge), and SAVE for your own
-  * TAPE / FLUTTER / CRUSH / SR / NOISE / NARROW for lofi and tape colour
+  Friendlitronics Amp.vst3        VST3 — Ableton, Reaper, Bitwig, Cubase, ...
+  Friendlitronics Amp.component   Audio Unit — Logic, GarageBand
 
-There are two copies of the same plugin in this folder:
-  Friendlitronics Amp.vst3        <- VST3 (recommended for Ableton)
-  Friendlitronics Amp.component   <- Audio Unit (optional; also works in Logic/GarageBand)
+INSTALL
+-------
+1. In Finder press Cmd+Shift+G and paste:
 
-1. COPY THE PLUGIN
-   In Finder, press Cmd+Shift+G, paste the path below, press Enter, and drag the
-   file into that folder (create the folder if it doesn't exist):
+       ~/Library/Audio/Plug-Ins/VST3
 
-     Friendlitronics Amp.vst3       ->  ~/Library/Audio/Plug-Ins/VST3
-     Friendlitronics Amp.component  ->  ~/Library/Audio/Plug-Ins/Components
+   Drag "Friendlitronics Amp.vst3" into that folder.
+   (For the Audio Unit, use ~/Library/Audio/Plug-Ins/Components instead.)
 
-   >>> If macOS blocks it and the "Allow" button in System Settings does
-   >>> nothing (or never appears), that is expected for plug-ins. See
-   >>> "IF MACOS BLOCKS IT - read this.txt" in this folder.
+2. Restart your DAW. In Ableton: Settings > Plug-Ins > Rescan.
 
-2. LET macOS RUN IT (one time)
-   The plugin isn't signed with a paid Apple developer certificate, so macOS
-   blocks it after downloading ("damaged" or "can't be verified"). Open Terminal
-   (Cmd+Space, type Terminal), paste this whole line, and press Enter:
+3. Find it under Plug-Ins > Friendlitronics > Friendlitronics Amp.
 
-     xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/VST3/"Friendlitronics Amp.vst3" ~/Library/Audio/Plug-Ins/Components/"Friendlitronics Amp.component" 2>/dev/null; killall -9 AudioComponentRegistrar 2>/dev/null; echo done
+That's it. This build is signed and notarised by Apple, so there are no
+security warnings and nothing to approve.
 
-   (It's fine if you only installed one of the two files.)
+FIRST THINGS TO TRY
+-------------------
+- The PRESET menu at the top right is grouped: FACTORY RIGS are whole setups,
+  FACTORY PEDALBOARDS are pedal-only and leave the amp alone.
+- The PEDALS tab has a chain strip along the top. Drag the tiles to reorder,
+  including the AMP tile — anything left of it feeds the amp input, anything
+  right of it runs after the speaker cabinet. Click a tile to switch it on.
+- SAVE stores your own presets, and asks whether to save everything, just the
+  amp, or just the pedalboard.
 
-3. SCAN IN ABLETON
-   Live > Settings (Live 11: Preferences) > Plug-Ins tab:
-     - turn on "Use VST3 Plug-in System Folders" (and/or "Use Audio Units v2")
-     - click "Rescan"
-   Then in the browser: Plug-Ins > Friendlitronics > Friendlitronics Amp. Drop it on a track.
+IF SOMETHING GOES WRONG
+-----------------------
+Plugin doesn't appear: quit the DAW completely, reopen, rescan. In Ableton
+check that "Use VST3 Plug-in System Folders" is switched on.
 
-PRESETS
-  The menu is split into FACTORY RIGS, FACTORY PEDALBOARDS, and your own saved
-  ones. SAVE asks whether to store Everything, Amp only, or Pedalboard only —
-  so you can drop any board onto any amp. An amp preset never moves your
-  pedals, and a board preset never touches your amp.
-  They are files in ~/Library/Application Support/Friendlitronics Amp/Presets.
+Audio Unit doesn't appear in Logic: run this in Terminal, then reopen Logic:
 
-NOTES
-  - Drag tiles in the chain strip to reorder, including the AMP tile. Click a
-    tile to toggle that pedal.
-  - WAH's Pedal knob and WHAMMY's Pitch knob are meant to be automated in Live.
-    Wah's AUTO makes it an envelope filter instead.
-  - WHAMMY tracks single notes; chords warble (it is a delay-line shifter).
-  - For bus/master colour, use the "Master:" presets, or the Line amp with cab
-    and mic set to "None (line out)".
-  - With FLUTTER above 0, keep MIX at 100%.
+    killall -9 AudioComponentRegistrar
+
+macOS says the plugin is damaged or from an unidentified developer: that
+should not happen with a release build — it means the file was altered in
+transit, or you have an older unsigned copy. Delete it, download the release
+again, and do not unzip with a third-party archiver.
